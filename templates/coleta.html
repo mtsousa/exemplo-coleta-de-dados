@@ -1,104 +1,230 @@
 {% extends "base.html" %}
-{% block title %} Home {% endblock %}
+{% block title %} Cadastro {% endblock %}
 
 {% block content %}
 <div class="container mt-5  align-items-center">
     <div class="row justify-content-center ">
-      <div class="col-md-10">
-        <div class="card">
-          <div class="card-header">
-            <h1>Simulação de Votação - Cadastro</h1>
-            <h4 class="mb-0">Registre seus dados para poder participar da votação</h4>
-          </div>
-          <div class="card-body">
-              <div class="alert alert-danger show" style="display: none;" role="alert">
-              </div>
-            <form class="form" name="registrar" method="post" role="form" action="/registrar" autocomplete="off" onsubmit = "return validateForm()">
-              <div class="form-group">
-                <label>NOME COMPLETO</label>
-                <input id="nome" class="form-control form-control-lg rounded-0" name="nomeCompleto" required>
-              </div>
-              <div class="form-group">
-                <label>CPF</label>
-                <input id="cpf" class="form-control form-control-lg rounded-0" maxlength="14" name="cpf" required>
-              </div>
-              <div class="form-group">
-                <label>TELEFONE</label>
-                <input id="telefone" class="form-control form-control-lg rounded-0" maxlength="14" name="telefone" required>
-              </div>
-              <div class="form-group">
-                <label>EMAIL</label>
-                <input id="email" type="email" class="form-control form-control-lg rounded-0" name="email" required>
-              </div>
-              <button type="submit" class="btn btn-success btn-lg">Registrar</button>
-            </form>
-          </div>
-        </div>
-      </div>
+		<div class="col-md-10" style="margin-bottom: 10px;">
+			<div class="card">
+			<div class="card-header">
+				<h1>Simulação de votação - Cadastro</h1>
+				<h4 class="mb-0">Registre seus dados para poder participar da votação</h4>
+			</div>
+			<div class="card-body">
+				<div class="alert alert-danger show" style="display: none;" role="alert">
+				</div>
+				<form class="form" name="registrar" method="post" role="form" action="/registrar" autocomplete="off" onsubmit = "return validateForm()">
+				<div class="form-group">
+					<label>NOME COMPLETO</label>
+					<input id="nome" class="form-control form-control-lg rounded-0" name="nomeCompleto" required>
+				</div>
+				<div class="form-group">
+					<label>CPF</label>
+					<input id="cpf" class="form-control form-control-lg rounded-0" maxlength="14" name="cpf" required>
+				</div>
+				<div class="form-group">
+					<label>TELEFONE</label>
+					<input id="telefone" class="form-control form-control-lg rounded-0" maxlength="14" name="telefone" required>
+				</div>
+				<div class="form-group">
+					<label>EMAIL</label>
+					<input id="email" type="email" class="form-control form-control-lg rounded-0" name="email" required>
+				</div>
+				<div class="form-group">
+					<label>CARGOS TITULARES</label>
+					<table class="table col-12">
+						<tbody>
+							<tr>
+								<td>
+									<input type="checkbox" value="" id="mdt" name="mdt">
+										Membro do Diretório Nacional Titular (MDT)
+									</label>
+								</td>
+								<td>
+									<input type="checkbox" value="" id="dlt" name="dlt">
+										Delegado Estadual Titular (DLT)
+									</label>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<input type="checkbox" value="" id="pde" name="pde">
+										Presidente do Diretório Estadual (PDE)
+									</label>
+								</td>
+								<td>
+									<input type="checkbox" value="" id="mcn" name="mcn">
+										Membro do Conselho Nacional (MCN)
+									</label>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<input type="checkbox" value="" id="sen" name="sen">
+										Senador da República (SEN)
+									</label>
+								</td>
+								<td>
+									<input type="checkbox" value="" id="dep" name="dep">
+										Deputado Federal (DEP)
+									</label>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<input type="checkbox" value="" id="lc" name="lc">
+										Líder da Bancada na Câmara dos Deputados (LC)
+									</label>
+								</td>
+								<td>
+									<input type="checkbox" value="" id="ls" name="ls">
+										Líder da Bancada no Senado Federal (LS)
+									</label>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<input type="checkbox" value="" id="epn" name="epn">
+										Ex-Presidente Nacional (EPN)
+									</label>
+								</td>
+								<td>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="form-group">
+					<label>CARGOS SUPLENTES</label>
+					<table class="table col-12">
+						<tbody>
+							<tr>
+								<td>
+									<input type="checkbox" value="" id="mds" name="mds">
+										Membro do Diretório Nacional Suplente (MDS)
+									</label>
+								</td>
+								<td>
+									<input type="checkbox" value="" id="dls" name="dls">
+										Delegado Estadual Suplente (DLS)
+									</label>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="col-md-12 align-items-center">
+					<div class="alert alert-danger alter-dismissable fade show" role="alert"></div>
+					<button type="submit" class="btn btn-success btn-lg col-12">Registrar</button>
+				</div>
+				
+				</form>
+			</div>
+			</div>
+		</div>
     </div>
+
+	<footer class="col-md-12">
+		<div class="container d-flex justify-content-center align-items-center">
+			<div class="copyright text-center my-auto ">
+				<span>Copyright &copy; Solutionz - 2023</span>
+			</div>
+			<div class="divider ml-3"></div>
+			<img style="height: 2.5rem;" class="ml-3" src="{{url_for('static', filename='logo_azul3.png')}}" alt="">
+		</div>
+	</footer>
+
   </div>
 
   <script>
     window.addEventListener('DOMContentLoaded', function() {
-      var cpfInput = document.getElementById('cpf');
-      cpfInput.addEventListener('input', function() {
-        var cpf = cpfInput.value;
-        cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o primeiro ponto
-        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o segundo ponto
-        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
-        
-        cpfInput.value = cpf;
-      });
+		// Oculta o alerta do botão de registro
+		var alerts = document.getElementsByClassName( "alert" );
+		if (alerts.length > 2){
+			alerts[2].hidden = true;
+		} else{
+			alerts[1].hidden = true;
+		}
 
-      var nomeInput = document.getElementById('nome');
-      nomeInput.addEventListener('input', function() {
-        var nome = nomeInput.value;
-        nome = nome.replace(/[^a-zA-Z\u00C0-\u00FF\s]/g, ''); // Remove caracteres não permitidos
-        
-        nomeInput.value = nome.toUpperCase();
-      });
+		var cpfInput = document.getElementById('cpf');
+		cpfInput.addEventListener('input', function() {
+			var cpf = cpfInput.value;
+			cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+			cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o primeiro ponto
+			cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o segundo ponto
+			cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
+			
+			cpfInput.value = cpf;
+		});
 
-      var telefoneInput = document.getElementById('telefone');
-      telefoneInput.addEventListener('input', function() {
-        var telefone = telefoneInput.value;
-        telefone = telefone.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-        telefone = telefone.replace(/(\d{0})(\d)/, '$1($2'); // Adiciona o primeiro parenteses
-        telefone = telefone.replace(/(\d{2})(\d)/, '$1)$2'); // Adiciona o segundo parenteses
-        telefone = telefone.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o traço
-        
-        telefoneInput.value = telefone;
-      });
+		var nomeInput = document.getElementById('nome');
+		nomeInput.addEventListener('input', function() {
+			var nome = nomeInput.value;
+			nome = nome.replace(/[^a-zA-Z\u00C0-\u00FF\s]/g, ''); // Remove caracteres não permitidos
+			
+			nomeInput.value = nome.toUpperCase();
+		});
+
+		var telefoneInput = document.getElementById('telefone');
+		telefoneInput.addEventListener('input', function() {
+			var telefone = telefoneInput.value;
+			telefone = telefone.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+			telefone = telefone.replace(/(\d{0})(\d)/, '$1($2'); // Adiciona o primeiro parenteses
+			telefone = telefone.replace(/(\d{2})(\d)/, '$1)$2'); // Adiciona o segundo parenteses
+			telefone = telefone.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o traço
+			
+			telefoneInput.value = telefone;
+		});
+
     });
 
     function validateForm() {
-        var nomeCompleto = document.forms["registrar"]["nomeCompleto"].value;
-        var cpf = document.forms["registrar"]["cpf"].value;
-        var telefone = document.forms["registrar"]["telefone"].value;
-        var email = document.forms["registrar"]["email"].value;
+        // var nomeCompleto = document.forms["registrar"]["nomeCompleto"].value;
+        // var cpf = document.forms["registrar"]["cpf"].value;
+        // var telefone = document.forms["registrar"]["telefone"].value;
+        // var email = document.forms["registrar"]["email"].value;
+		var markedCheckboxes = document.querySelectorAll('input[type=checkbox]:checked');
+		var alerts = document.getElementsByClassName("alert");
+		
+		if (alerts.length > 2){
+			var alert = alerts[2];
+		} else{
+			var alert = alerts[1];
+		}
 
-        if(nomeCompleto == null || nomeCompleto == "") {
-            document.getElementsByClassName( "alert" )[0].style.display = "block";
-            document.getElementsByClassName( "alert" )[0].innerHTML = "O campo Nome Completo é obrigatório";
-            return false;
-        } else if(cpf.length < 14) {
-            document.getElementsByClassName( "alert" )[0].style.display = "block";
-            document.getElementsByClassName( "alert" )[0].innerHTML = "O campo CPF está incorreto";
-            return false;
-        } else if(telefone.length < 14) {
-            document.getElementsByClassName( "alert" )[0].style.display = "block";
-            document.getElementsByClassName( "alert" )[0].innerHTML = "O campo Telefone está incorreto";
-            return false;
-        } else if(email == null || email == "") {
-            document.getElementsByClassName( "alert" )[0].style.display = "block";
-            document.getElementsByClassName( "alert" )[0].innerHTML = "O campo Email é obrigatório";
+        // if(nomeCompleto == null || nomeCompleto == "") {
+        //     document.getElementsByClassName( "alert" )[0].style.display = "block";
+        //     document.getElementsByClassName( "alert" )[0].innerHTML = "O campo Nome Completo é obrigatório.";
+        //     return false;
+        // } else if(cpf.length < 14) {
+        //     document.getElementsByClassName( "alert" )[0].style.display = "block";
+        //     document.getElementsByClassName( "alert" )[0].innerHTML = "O campo CPF está incorreto.";
+        //     return false;
+        // } else if(telefone.length < 14) {
+        //     document.getElementsByClassName( "alert" )[0].style.display = "block";
+        //     document.getElementsByClassName( "alert" )[0].innerHTML = "O campo Telefone está incorreto.";
+        //     return false;
+        // } else if(email == null || email == "") {
+        //     document.getElementsByClassName( "alert" )[0].style.display = "block";
+        //     document.getElementsByClassName( "alert" )[0].innerHTML = "O campo Email é obrigatório.";
+        //     return false;
+		if(markedCheckboxes.length < 1) {
+			alert.hidden = false;
+            alert.style.display = "block";
+            alert.innerHTML = "Ao menos um cargo deve estar preenchido.";
             return false;
         } else {
-            document.getElementsByClassName( "alert" )[0].style.visibility = "block";
-            document.getElementsByClassName( "alert" )[0].innerHTML = "";
+			alert.hidden = true;
+            alert.style.visibility = "block";
+            alert.innerHTML = "";
             return true;
-        }
-            
+        }    
     }
   </script>
 {% endblock %}
