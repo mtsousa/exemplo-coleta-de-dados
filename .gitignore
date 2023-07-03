@@ -4,3 +4,4 @@ pECD/
 .dockerignore
 docker-gcloud.md
 Dockerfile
+instance/

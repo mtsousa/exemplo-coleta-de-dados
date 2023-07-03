@@ -1,19 +1,40 @@
 from datetime import datetime  
 from flask import Flask, flash, render_template, request, redirect
-import csv
-import os
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.debug = True
 app.config['SECRET_KEY'] = 'asdasdasdasd'
 
-if not os.path.isfile(r"data.csv"):
-        with open('data.csv', 'a', encoding='UTF8', newline='') as f:
-            # create the csv writer
-            writer = csv.writer(f, delimiter=';')
-            data = ['nome completo','cpf','telefone','email','cargos','data','ip','browser','version','platform','uas']
-            # write a row to the csv file
-            writer.writerow(data)
+app.config["SQLALCHEMY_DATABASE_URI"]= "sqlite:///database.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
+
+db = SQLAlchemy(app)
+
+class Usuarios(db.Model):
+    __tablename__ = 'usuarios'
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    nome_completo = db.Column(db.String(256), nullable=False)
+    cpf = db.Column(db.String(14), nullable=False)
+    telefone = db.Column(db.String(14), nullable=False, unique=True)
+    email = db.Column(db.String(256), nullable=False)
+    cargos = db.Column(db.String(50), nullable=False)
+    timestamp = db.Column(db.String(30), nullable=False)
+    ip = db.Column(db.String(50), nullable=False)
+    uas = db.Column(db.String(256), nullable=False)
+
+    def __init__(self, nome_completo, cpf, telefone, email, cargos, timestamp, ip, uas):
+        self.nome_completo = nome_completo
+        self.cpf = cpf
+        self.telefone = telefone
+        self.email = email
+        self.cargos = cargos
+        self.timestamp = timestamp
+        self.ip = ip
+        self.uas = uas
+
+with app.app_context():
+    db.create_all()
 
 @app.route("/")
 def coleta():
@@ -21,26 +42,19 @@ def coleta():
 
 @app.route("/registrar", methods=['POST'])
 def registrar():
+    nome_completo = request.form['nomeCompleto'][:255]
+    cpf = request.form['cpf']
+    telefone = request.form['telefone']
+    email = request.form['email'][:255]
+    cargos = ','.join(x.upper() for x in list(request.form.keys())[4:])
+    timestamp = datetime.utcnow() # UTC
     ip = request.remote_addr
-    browser = request.user_agent.browser
-    version = request.user_agent.version and int(request.user_agent.version.split('.')[0])
-    platform = request.user_agent.platform
-    uas = request.user_agent.string
-    timestamp = datetime.timestamp(datetime.now())
+    uas = str(request.user_agent.string)[:255]
 
-    # get the offices
-    offices = ','.join(x.upper() for x in list(request.form.keys())[4:])
+    data = Usuarios(nome_completo, cpf, telefone, email, cargos, timestamp, ip, uas)
+    db.session.add(data)
+    db.session.commit()
 
-    # convert the timestamp to a datetime object in the local timezone
-    dt_object = datetime.fromtimestamp(timestamp)
-    with open('data.csv', 'a', encoding='UTF8', newline='') as f:
-        # create the csv writer
-        writer = csv.writer(f, delimiter=';')
-        data = [request.form['nomeCompleto'],request.form['cpf'],request.form['telefone'],request.form['email'],offices,dt_object,ip, browser, version, platform, uas]
-        
-        # write a row to the csv file
-        writer.writerow(data)
-    
     flash('Obrigado por se registrar!')
     return redirect('/', 302)
 
