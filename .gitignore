@@ -1,7 +1,3 @@
 __pycache__/
-*.csv
 pECD/
-.dockerignore
-docker-gcloud.md
-Dockerfile
 instance/

@@ -31,6 +31,39 @@
 					<input id="email" type="email" class="form-control form-control-lg rounded-0" name="email" required>
 				</div>
 				<div class="form-group">
+					<label>ESTADO</label>
+					<select class="form-select col-md-12" id="estado" name="estado" aria-label="----">
+						<option value="----">----</option>
+						<option value="Acre - AC">Acre - AC</option>
+						<option value="Alagoas - AL">Alagoas - AL</option>
+						<option value="Amapá - AP">Amapá - AP</option>
+						<option value="Amazonas - AM">Amazonas - AM</option>
+						<option value="Bahia - BA">Bahia - BA</option>
+						<option value="Ceará - CE">Ceará - CE</option>
+						<option value="Distrito Federal - DF">Distrito Federal - DF</option>
+						<option value="Espírito Santo - ES">Espírito Santo - ES</option>
+						<option value="Goiás - GO">Goiás - GO</option>
+						<option value="Maranhão - MA">Maranhão - MA</option>
+						<option value="Mato Grosso - MT">Mato Grosso - MT</option>
+						<option value="Mato Grosso do Sul - MS">Mato Grosso do Sul - MS</option>
+						<option value="Minas Gerais - MG">Minas Gerais - MG</option>
+						<option value="Pará - PA">Pará - PA</option>
+						<option value="Paraíba - PB">Paraíba - PB</option>
+						<option value="Paraná - PR">Paraná - PR</option>
+						<option value="Pernambuco - PE">Pernambuco - PE</option>
+						<option value="Piauí - PI">Piauí - PI</option>
+						<option value="Rio de Janeiro - RJ">Rio de Janeiro - RJ</option>
+						<option value="Rio Grande do Norte - RN">Rio Grande do Norte - RN</option>
+						<option value="Rio Grande do Sul - RS">Rio Grande do Sul - RS</option>
+						<option value="Rondônia - RO">Rondônia - RO</option>
+						<option value="Roraima - RR">Roraima - RR</option>
+						<option value="Santa Catarina - SC">Santa Catarina - SC</option>
+						<option value="São Paulo - SP">São Paulo - SP</option>
+						<option value="Sergipe - SE">Sergipe - SE</option>
+						<option value="Tocantins - TO">Tocantins - TO</option>
+					</select>
+				</div>
+				<div class="form-group">
 					<label>CARGOS TITULARES</label>
 					<table class="table col-12">
 						<tbody>
@@ -191,6 +224,11 @@
         // var email = document.forms["registrar"]["email"].value;
 		var markedCheckboxes = document.querySelectorAll('input[type=checkbox]:checked');
 		var alerts = document.getElementsByClassName("alert");
+		var state = document.forms["registrar"]["estado"].value;
+		const stateList = ["Acre - AC", "Alagoas - AL", "Amapá - AP", "Amazonas - AM", "Bahia - BA", "Ceará - CE", "Distrito Federal - DF",
+						   "Espírito Santo - ES", "Goiás - GO", "Maranhão - MA", "Mato Grosso - MT", "Mato Grosso do Sul - MS", "Minas Gerais - MG",
+						   "Pará - PA", "Paraíba - PB", "Paraná - PR", "Pernambuco - PE", "Piauí - PI", "Rio de Janeiro - RJ", "Rio Grande do Norte - RN",
+						   "Rio Grande do Sul - RS", "Rondônia - RO", "Roraima - RR", "Santa Catarina - SC", "São Paulo - SP", "Sergipe - SE", "Tocantins - TO"];
 		
 		if (alerts.length > 2){
 			var alert = alerts[2];
@@ -219,12 +257,17 @@
             alert.style.display = "block";
             alert.innerHTML = "Ao menos um cargo deve estar preenchido.";
             return false;
-        } else {
+        } else if(!stateList.includes(state)) {
+			alert.hidden = false;
+            alert.style.display = "block";
+            alert.innerHTML = "Preencha o campo Estado.";
+            return false;
+		} else {
 			alert.hidden = true;
             alert.style.visibility = "block";
             alert.innerHTML = "";
             return true;
-        }    
+        }
     }
   </script>
 {% endblock %}
